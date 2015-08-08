@@ -1,24 +1,13 @@
-<html>
-	<head>
-		<title>Monster blog!</title>
-	</head>
-	<body>
-		<div>
-			<h1>Many monsters make mudpies</h1>
-				<p>Hi there!</p>
-				<p>It works!</p>
-		</div>
-		<div>
-			<h2>Monsters dance the Tango</h2>
-			<p>They don't do it very well, but they do it with gusto.</p>
-		</div>
-	{% for post in posts %}
-		<div>
-			<p>published: {{ post.published_date }}</p>
-			<h1><a href="">{{ post.title }}</a></h1>
-			<p>{{ post.text|linebreaks }}</p>
-		</div>
-	{% endfor %}
-
-	</body>
-</html>
+{% extends "blog/base.html" %}
+	{% block content %}
+            {% for post in posts %}
+                <div class="post">
+                    <div class="date">
+                        {{ post.published_date }}
+                    </div>
+                    <h1><a href="{% url "post_detail" pk=post.pk %}">{{ post.title }}</a></h1>
+                    <p>{{ post.text|linebreaks }}</p>
+                </div>
+            {% endfor %}
+    {% endblock content %}
+    
